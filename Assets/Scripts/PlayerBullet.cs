@@ -6,17 +6,18 @@ public class PlayerBullet : MonoBehaviour
     private float maxY;
 
     void Start() {
-        maxY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
+        maxY = Camera.main.ViewportToWorldPoint(Vector2.up).y;
     }
 
     void Update()
     {
-        // Mover la bala hacia arriba
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        // Mover la bala hacia arriba usando Vector2
+        Vector2 position = (Vector2)transform.position;
+        position += Vector2.up * speed * Time.deltaTime;
+        transform.position = position;
 
         // Si la bala sale de la pantalla, destruirla
-        if (transform.position.y > maxY){
-            Debug.Log("Bala destruida en Y: " + transform.position.y); // Depuración
+        if (position.y > maxY) {            
             Destroy(gameObject);
         }
     }
