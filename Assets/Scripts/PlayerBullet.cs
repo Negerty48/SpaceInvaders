@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 8f; // Velocidad ajustable desde el Inspector
+    public float speed = 8f; 
     private float maxY;
 
     void Start() {

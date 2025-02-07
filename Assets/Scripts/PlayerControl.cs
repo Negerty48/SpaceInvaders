@@ -1,17 +1,18 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControll : MonoBehaviour
 {
-    [SerializeField] GameObject GameManagerGO;
-    [SerializeField] GameObject PlayerBullet;
-    [SerializeField] Transform Bullet01;
-    [SerializeField] Transform Bullet02;
-    [SerializeField] GameObject Explosion;
-    [SerializeField] Text LivesUIText;
+    public GameObject GameManagerGO;
+    public GameObject PlayerBullet;
+    public Transform Bullet01;
+    public Transform Bullet02;
+    public GameObject Explosion;
+    public TextMeshProUGUI LivesUIText;
+
     const int maxLives = 3;
     int lives;
-    [SerializeField] float speed = 5f; // Velocidad de movimiento
+    public float speed = 5f; // Velocidad de movimiento
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Vector2 minBounds, maxBounds;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         lives = maxLives;
         LivesUIText.text = lives.ToString();
+        transform.position = Vector2.zero;
         gameObject.SetActive(true);
     }
 
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Shoot() {
+        GetComponent<AudioSource>().Play();
         Instantiate(PlayerBullet, Bullet01.position, Quaternion.identity);
         Instantiate(PlayerBullet, Bullet02.position, Quaternion.identity);
     }

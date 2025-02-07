@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
-    [SerializeField] private GameObject Explosion;
-    [SerializeField] private float speed = 2f;
+    GameObject scoreUIText; 
+    public GameObject Explosion;
+    public float speed;
+
+    void Start()
+    {
+        speed = 2f;
+        scoreUIText = GameObject.FindGameObjectWithTag("ScoreTextTag");
+    }
 
     void Update()
     {
@@ -22,6 +29,7 @@ public class EnemyControl : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag")) {
             PlayExplosion();
+            scoreUIText.GetComponent<GameScore>().Score += 100;
             Destroy(gameObject);
         }
     }

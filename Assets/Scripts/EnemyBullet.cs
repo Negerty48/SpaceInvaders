@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    public float speed = 5f;
     private Vector2 _direction;
     private bool isReady = false;
 

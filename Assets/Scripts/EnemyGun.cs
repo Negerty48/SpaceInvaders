@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyGun : MonoBehaviour
 {
-    [SerializeField] private GameObject EnemyBullet;
+    public GameObject EnemyBullet;
 
     void Start()
     {

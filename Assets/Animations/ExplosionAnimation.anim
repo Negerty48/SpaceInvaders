@@ -103,7 +103,7 @@ AnimationClip:
   - time: 0.9166667
     functionName: DestroyGameObject
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 2add0556144daa742bf826cfe4bac981, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -2,14 +2,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject Enemy;
-    [SerializeField] private float maxSpawnRateInSeconds = 5f;
-
-    void Start()
-    {
-        Invoke(nameof(SpawnEnemy), maxSpawnRateInSeconds); // Primer enemigo después de `maxSpawnRateInSeconds`
-        InvokeRepeating(nameof(IncreaseSpawnRate), 0f, 30f); // Reduce el tiempo de spawn cada 30s
-    }
+    public GameObject Enemy;
+    public float maxSpawnRateInSeconds = 5f;
 
     void SpawnEnemy()
     {
@@ -24,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     void ScheduleNextEnemySpawn() 
     {
+        maxSpawnRateInSeconds = 5f;
         float spawnInNSeconds = Mathf.Max(1f, Random.Range(1f, maxSpawnRateInSeconds));
         Invoke(nameof(SpawnEnemy), spawnInNSeconds);
     }
@@ -38,5 +33,17 @@ public class EnemySpawner : MonoBehaviour
         {
             CancelInvoke(nameof(IncreaseSpawnRate));
         }
+    }
+
+    public void StartEnemySpawner()
+    {
+        Invoke(nameof(SpawnEnemy), maxSpawnRateInSeconds);
+        InvokeRepeating(nameof(IncreaseSpawnRate), 0f, 30f);
+    }
+
+    public void StopEnemySpawner()
+    {
+        CancelInvoke("SpawnEnemy");
+        CancelInvoke("IncreaseSpawnRate");
     }
 }
