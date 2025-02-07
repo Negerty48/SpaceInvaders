@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    [SerializeField] private GameObject Explosion;
     [SerializeField] private float speed = 2f;
 
     void Update()
@@ -16,5 +17,16 @@ public class EnemyControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag")) {
+            PlayExplosion();
+            Destroy(gameObject);
+        }
+    }
+
+    void PlayExplosion() {
+        GameObject explosion = Instantiate(Explosion, (Vector2)transform.position, Quaternion.identity);
     }
 }

@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject PlayerBullet;
     [SerializeField] Transform Bullet01;
     [SerializeField] Transform Bullet02;
+    [SerializeField] GameObject Explosion;
     [SerializeField] float speed = 5f; // Velocidad de movimiento
     private Rigidbody2D rb;
     private Vector2 movementInput;
@@ -54,5 +55,16 @@ public class PlayerController : MonoBehaviour
     void Shoot() {
         Instantiate(PlayerBullet, Bullet01.position, Quaternion.identity);
         Instantiate(PlayerBullet, Bullet02.position, Quaternion.identity);
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag")) {
+            PlayExplosion();
+            Destroy(gameObject);
+        }
+    }
+
+    void PlayExplosion() {
+        GameObject explosion = Instantiate(Explosion, (Vector2)transform.position, Quaternion.identity);
     }
 }
