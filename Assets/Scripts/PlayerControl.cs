@@ -1,15 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] GameObject GameManagerGO;
     [SerializeField] GameObject PlayerBullet;
     [SerializeField] Transform Bullet01;
     [SerializeField] Transform Bullet02;
     [SerializeField] GameObject Explosion;
+    [SerializeField] Text LivesUIText;
+    const int maxLives = 3;
+    int lives;
     [SerializeField] float speed = 5f; // Velocidad de movimiento
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Vector2 minBounds, maxBounds;
+
+    public void Init() 
+    {
+        lives = maxLives;
+        LivesUIText.text = lives.ToString();
+        gameObject.SetActive(true);
+    }
 
     void Start()
     {
@@ -60,7 +72,12 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag")) {
             PlayExplosion();
-            Destroy(gameObject);
+            lives--;
+            LivesUIText.text = lives.ToString();
+            if(lives == 0) {
+                GameManagerGO.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+                gameObject.SetActive(false);
+            }
         }
     }
 
