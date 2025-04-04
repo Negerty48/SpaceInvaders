@@ -8,6 +8,7 @@ Un pequeño juego retro desarrollado con Unity para Linux/Windows.
 
 > ✅ Descomprime el archivo y ejecuta el fichero correspondiente (`.x86_64` en Linux, `.exe` en Windows). 
 > 🔐 En Linux necesitarás darle permisos de ejecución:
-``` Abre una terminalen la carpeta descargada
+> Abre una terminal en la carpeta descargada
+``` 
 chmod 777 LinuxExec.x86_64
 ./LinuxExec.x86_64
